@@ -4,49 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Nitya Mittal | Sustainable Energy & CFD</title>
+  <title>Nitya Mittal | CFD &amp; Sustainable Energy</title>
   <meta
     name="description"
-    content="Portfolio of Nitya Mittal, MSc Sustainable Energy Engineering student at Lund University, with projects in computational fluid dynamics and thermal systems."
+    content="Portfolio of Nitya Mittal, an MSc Sustainable Energy Engineering student at Lund University working with CFD, thermal systems, and computational modelling."
   >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
   <style>
     :root {
       --burgundy: #6B1734;
-      --burgundy-dark: #4C0E24;
+      --burgundy-dark: #471022;
+      --burgundy-light: #8E3550;
       --creme: #F7F0E4;
+      --creme-deep: #EDE1D2;
       --paper: #FFFBF5;
-      --ink: #2D2526;
-      --muted: #75696A;
+      --ink: #2C2024;
+      --muted: #74636A;
       --line: rgba(107, 23, 52, 0.18);
-      --white-line: rgba(247, 240, 228, 0.25);
-      --shadow: 0 20px 55px rgba(73, 36, 43, 0.10);
+      --light-line: rgba(247, 240, 228, 0.22);
+      --shadow: 0 24px 70px rgba(71, 16, 34, 0.09);
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 100px;
     }
 
     body {
+      margin: 0;
       background: var(--creme);
       color: var(--ink);
-      font-family: "DM Sans", Arial, sans-serif;
+      font-family: var(--sans);
       font-size: 16px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+    }
+
+    body,
+    h1,
+    h2,
+    h3,
+    p,
+    figure {
+      margin-top: 0;
     }
 
     img {
@@ -60,34 +75,48 @@
     }
 
     button,
-    summary,
     a {
       -webkit-tap-highlight-color: transparent;
     }
 
-    a:focus-visible,
-    summary:focus-visible {
-      outline: 3px solid var(--burgundy);
-      outline-offset: 4px;
+    button {
+      font: inherit;
     }
 
-    .container {
-      width: min(1120px, calc(100% - 48px));
-      margin-inline: auto;
+    ul,
+    ol {
+      margin-top: 0;
     }
 
-    .skip-link {
-      position: absolute;
-      top: -100px;
-      left: 20px;
-      z-index: 1000;
-      padding: 10px 16px;
+    ::selection {
       background: var(--burgundy);
       color: var(--creme);
     }
 
+    :focus-visible {
+      outline: 3px solid var(--burgundy-light);
+      outline-offset: 5px;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      padding: 10px 16px;
+      background: var(--burgundy);
+      color: var(--creme);
+      transform: translateY(-160%);
+      transition: transform 180ms ease;
+    }
+
     .skip-link:focus {
-      top: 20px;
+      transform: translateY(0);
     }
 
     /* Header */
@@ -98,10 +127,11 @@
       z-index: 100;
       border-bottom: 1px solid var(--line);
       background: rgba(247, 240, 228, 0.94);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(16px);
     }
 
-    .nav-wrap {
+    .header-inner {
+      position: relative;
       min-height: 82px;
       display: flex;
       align-items: center;
@@ -112,46 +142,62 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 600;
+      gap: 13px;
+      flex-shrink: 0;
     }
 
     .monogram {
-      width: 43px;
-      height: 43px;
+      width: 46px;
+      height: 46px;
       display: grid;
       place-items: center;
-      flex-shrink: 0;
+      border: 1px solid var(--burgundy);
       background: var(--burgundy);
       color: var(--creme);
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 18px;
-      letter-spacing: 0.04em;
+      font-family: var(--serif);
+      font-size: 23px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
     }
 
-    .brand-name {
-      letter-spacing: -0.02em;
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
     }
 
-    .nav-links {
+    .brand-text strong {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-text small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .primary-nav {
       display: flex;
       align-items: center;
-      gap: 30px;
-      list-style: none;
-      font-size: 0.86rem;
-      font-weight: 600;
+      gap: 28px;
     }
 
-    .nav-links a {
+    .primary-nav > a:not(.nav-cv) {
       position: relative;
-      padding-block: 8px;
+      color: #5C4850;
+      font-size: 13px;
+      font-weight: 500;
     }
 
-    .nav-links a::after {
+    .primary-nav > a:not(.nav-cv)::after {
       content: "";
       position: absolute;
       right: 0;
-      bottom: 2px;
+      bottom: -6px;
       left: 0;
       height: 1px;
       background: var(--burgundy);
@@ -160,86 +206,133 @@
       transition: transform 180ms ease;
     }
 
-    .nav-links a:hover::after {
+    .primary-nav > a:not(.nav-cv):hover {
+      color: var(--burgundy);
+    }
+
+    .primary-nav > a:not(.nav-cv):hover::after {
       transform: scaleX(1);
       transform-origin: left;
     }
 
-    /* Shared */
-
-    section {
-      scroll-margin-top: 90px;
+    .nav-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 17px;
+      border: 1px solid var(--burgundy);
+      color: var(--burgundy);
+      font-size: 12px;
+      font-weight: 600;
+      transition:
+        background 180ms ease,
+        color 180ms ease;
     }
 
-    .section {
-      padding-block: 96px;
+    .nav-cv:hover {
+      background: var(--burgundy);
+      color: var(--creme);
     }
 
-    .section-border {
-      border-top: 1px solid var(--line);
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      background: transparent;
+      cursor: pointer;
     }
+
+    .nav-toggle span {
+      display: block;
+      width: 100%;
+      height: 1px;
+      margin: 5px 0;
+      background: var(--burgundy);
+      transition: transform 180ms ease;
+    }
+
+    /* Shared elements */
 
     .eyebrow {
-      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
       color: var(--burgundy);
-      font-size: 0.75rem;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       line-height: 1.4;
       text-transform: uppercase;
     }
 
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      flex-shrink: 0;
+      background: currentColor;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
     .section-heading {
-      display: grid;
-      grid-template-columns: 0.75fr 1.25fr;
-      gap: 50px;
-      align-items: start;
+      max-width: 760px;
       margin-bottom: 52px;
     }
 
-    h1,
-    h2,
-    h3 {
-      font-family: "Playfair Display", Georgia, serif;
+    .section-heading h2,
+    .contact-section h2 {
+      margin-bottom: 20px;
+      color: var(--burgundy-dark);
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5.5vw, 4.8rem);
       font-weight: 500;
-      line-height: 1.08;
-    }
-
-    h2 {
-      color: var(--burgundy);
-      font-size: clamp(2.25rem, 5vw, 3.65rem);
       letter-spacing: -0.035em;
+      line-height: 0.98;
     }
 
-    h3 {
-      font-size: clamp(1.8rem, 3.5vw, 2.65rem);
-      letter-spacing: -0.025em;
+    .section-heading h2 em {
+      color: var(--burgundy);
+      font-weight: 500;
     }
 
-    .section-intro {
-      max-width: 650px;
+    .section-lede {
+      max-width: 620px;
+      margin-bottom: 0;
       color: var(--muted);
-      font-size: 1.05rem;
+      font-size: 17px;
     }
 
     .button-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 32px;
+      gap: 13px;
     }
 
     .button {
-      min-height: 48px;
       display: inline-flex;
+      min-height: 50px;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 12px 21px;
+      gap: 12px;
+      padding: 13px 22px;
       border: 1px solid var(--burgundy);
-      font-size: 0.88rem;
+      font-size: 13px;
       font-weight: 600;
-      transition: background 180ms ease, color 180ms ease;
+      line-height: 1.3;
+      transition:
+        background 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
     }
 
     .button-primary {
@@ -264,573 +357,826 @@
     /* Hero */
 
     .hero {
-      padding-block: 76px 92px;
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+      align-items: center;
+      gap: 70px;
+      padding-top: 82px;
+      padding-bottom: 70px;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      gap: 72px;
-      align-items: center;
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 4%;
+      left: -18%;
+      z-index: -1;
+      width: 520px;
+      height: 520px;
+      border: 1px solid rgba(107, 23, 52, 0.08);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .hero h1 {
       max-width: 760px;
-      color: var(--burgundy);
-      font-size: clamp(4rem, 8.5vw, 7rem);
-      letter-spacing: -0.065em;
+      margin-bottom: 30px;
+      color: var(--burgundy-dark);
+      font-family: var(--serif);
+      font-size: clamp(4rem, 7.4vw, 6.7rem);
+      font-weight: 500;
+      letter-spacing: -0.05em;
+      line-height: 0.87;
     }
 
     .hero h1 em {
-      display: block;
+      color: var(--burgundy);
       font-weight: 500;
     }
 
-    .hero-lead {
-      max-width: 610px;
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: clamp(1.05rem, 2vw, 1.22rem);
+    .hero-intro {
+      max-width: 630px;
+      margin-bottom: 34px;
+      color: #65545B;
+      font-size: 17px;
+      line-height: 1.8;
     }
 
-    .hero-lead strong {
+    .hero-intro strong {
       color: var(--ink);
       font-weight: 600;
     }
 
-    .portrait-wrap {
+    .hero-portrait-wrap {
       position: relative;
-      padding: 14px;
+      width: 100%;
+      max-width: 405px;
+      justify-self: end;
     }
 
-    .portrait-wrap::before {
+    .hero-portrait-wrap::before {
       content: "";
       position: absolute;
-      inset: 0 20px 34px 0;
+      top: 24px;
+      right: -20px;
+      bottom: 56px;
+      left: 24px;
       border: 1px solid var(--burgundy);
-      transform: rotate(4deg);
+      opacity: 0.35;
     }
 
     .portrait-frame {
       position: relative;
-      overflow: hidden;
+      z-index: 1;
+      margin-bottom: 0;
+    }
+
+    .portrait-image-wrap {
       aspect-ratio: 4 / 5;
-      background: #E8DDCE;
+      overflow: hidden;
+      border-radius: 210px 210px 12px 12px;
+      background: var(--creme-deep);
       box-shadow: var(--shadow);
     }
 
-    .portrait-frame img {
+    .portrait-image-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: 30% 70%;
     }
 
-    .portrait-caption {
-      position: relative;
-      margin-top: 18px;
-      color: var(--burgundy);
-      font-size: 0.73rem;
-      font-weight: 700;
+    .portrait-frame figcaption {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 16px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
       letter-spacing: 0.1em;
-      line-height: 1.6;
-      text-align: center;
       text-transform: uppercase;
+    }
+
+    .portrait-badge {
+      position: absolute;
+      right: -28px;
+      bottom: 82px;
+      z-index: 2;
+      width: 98px;
+      height: 98px;
+      display: grid;
+      place-items: center;
+      border: 7px solid var(--creme);
+      border-radius: 50%;
+      background: var(--burgundy);
+      color: var(--creme);
+      font-family: var(--serif);
+      font-size: 21px;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .hero-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-fact {
+      padding: 25px 28px;
+    }
+
+    .hero-fact:first-child {
+      padding-left: 0;
+    }
+
+    .hero-fact + .hero-fact {
+      border-left: 1px solid var(--line);
+    }
+
+    .hero-fact span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-fact strong {
+      color: var(--burgundy-dark);
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.2;
     }
 
     /* About */
 
     .about-grid {
       display: grid;
-      grid-template-columns: 0.75fr 1.25fr;
-      gap: 70px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+      gap: 80px;
+      align-items: start;
     }
 
-    .about-copy {
-      max-width: 710px;
-      font-size: 1.08rem;
+    .about-copy p {
+      margin-bottom: 23px;
+      color: #5F5056;
+      font-size: 17px;
+      line-height: 1.85;
     }
 
-    .about-copy p + p {
-      margin-top: 20px;
+    .about-copy p:first-child {
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.7;
     }
 
     .about-note {
-      margin-top: 30px;
-      padding: 22px 24px;
-      border-left: 3px solid var(--burgundy);
-      background: rgba(255, 251, 245, 0.65);
-      color: var(--burgundy);
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: 1.3rem;
-      font-style: italic;
-      line-height: 1.45;
+      padding: 36px;
+      background: var(--burgundy);
+      color: var(--creme);
+      box-shadow: var(--shadow);
+    }
+
+    .about-note-label {
+      margin-bottom: 12px;
+      color: #E5C4CE;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .about-note h3 {
+      margin-bottom: 12px;
+      font-family: var(--serif);
+      font-size: 33px;
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .about-note p:not(.about-note-label) {
+      margin-bottom: 0;
+      color: #EADDD2;
+      font-size: 14px;
+    }
+
+    .about-note hr {
+      height: 1px;
+      margin: 28px 0;
+      border: 0;
+      background: var(--light-line);
     }
 
     /* Projects */
 
+    .projects-section {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--creme-deep);
+    }
+
     .project-list {
       display: grid;
-      gap: 42px;
+      gap: 38px;
     }
 
-    .project {
-      overflow: hidden;
+    .project-card {
       display: grid;
-      grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+      overflow: hidden;
       border: 1px solid var(--line);
       background: var(--paper);
-      box-shadow: 0 10px 35px rgba(73, 36, 43, 0.05);
+      box-shadow: var(--shadow);
     }
 
-    .project-media {
+    .project-visual {
+      min-width: 0;
       min-height: 100%;
-      background: #ECE2D4;
+      background: #DCCFC0;
     }
 
-    .project-media img {
+    .project-visual img {
       width: 100%;
       height: 100%;
-      min-height: 390px;
+      min-height: 520px;
       object-fit: cover;
     }
 
-    .project-media-contain {
-      object-fit: contain !important;
+    .project-visual img.project-media-contain {
       padding: 22px;
+      object-fit: contain;
+    }
+
+    .project-card-reverse .project-visual {
+      order: 2;
     }
 
     .project-content {
-      padding: clamp(28px, 5vw, 52px);
+      min-width: 0;
+      padding: 44px;
     }
 
-    .project-number {
-      margin-bottom: 16px;
-      color: var(--burgundy);
-      font-size: 0.74rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .project h3 {
-      color: var(--burgundy);
-    }
-
-    .project-meta {
+    .project-topline {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px 18px;
-      margin-top: 16px;
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 500;
-    }
-
-    .project-description {
-      margin-top: 24px;
-      color: var(--muted);
-    }
-
-    .collaborators {
-      margin-top: 15px;
-      font-size: 0.88rem;
-    }
-
-    .collaborators strong {
+      justify-content: space-between;
+      gap: 10px 18px;
+      margin-bottom: 25px;
       color: var(--burgundy);
-    }
-
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .metric {
-      padding-top: 14px;
-      border-top: 2px solid var(--burgundy);
-    }
-
-    .metric-value {
-      display: block;
-      color: var(--burgundy);
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(1.35rem, 3vw, 1.85rem);
-      line-height: 1.2;
-    }
-
-    .metric-label {
-      display: block;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 0.73rem;
-      line-height: 1.45;
-    }
-
-    .details {
-      margin-top: 24px;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .details summary {
-      padding-block: 15px;
-      color: var(--burgundy);
-      cursor: pointer;
-      font-size: 0.86rem;
-      font-weight: 700;
-      list-style-position: outside;
-    }
-
-    .details-content {
-      padding: 0 0 20px 18px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .details-content ul {
-      padding-left: 18px;
-    }
-
-    .details-content li + li {
-      margin-top: 7px;
-    }
-
-    .details-content p + p,
-    .details-content p + ul,
-    .details-content ul + p {
-      margin-top: 13px;
-    }
-
-    .details-content strong {
-      color: var(--ink);
-    }
-
-    .comparison-table {
-      width: 100%;
-      margin-top: 16px;
-      border-collapse: collapse;
-      color: var(--ink);
-      font-size: 0.82rem;
-    }
-
-    .comparison-table th,
-    .comparison-table td {
-      padding: 8px 6px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-    }
-
-    .comparison-table thead {
-      color: var(--burgundy);
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 22px;
-      list-style: none;
-    }
-
-    .tag {
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      color: var(--burgundy);
-      font-size: 0.72rem;
-      font-weight: 600;
-    }
-
-    .text-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin-top: 28px;
-      padding-bottom: 4px;
-      border-bottom: 1px solid var(--burgundy);
-      color: var(--burgundy);
-      font-size: 0.88rem;
-      font-weight: 700;
-    }
-
-    .text-link:hover {
-      color: var(--burgundy-dark);
-      border-color: var(--burgundy-dark);
-    }
-
-    /* Education and skills */
-
-    .education-list {
-      border-top: 1px solid var(--line);
-    }
-
-    .education-item {
-      display: grid;
-      grid-template-columns: 0.35fr 1fr 0.45fr;
-      gap: 28px;
-      align-items: center;
-      padding-block: 28px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .education-item .degree-label {
-      color: var(--burgundy);
-      font-size: 0.75rem;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
-    .education-item h3 {
-      font-size: clamp(1.3rem, 2.6vw, 1.8rem);
-      line-height: 1.25;
+    .project-content h3 {
+      margin-bottom: 19px;
+      color: var(--burgundy-dark);
+      font-family: var(--serif);
+      font-size: clamp(2.25rem, 4vw, 3.15rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1;
     }
 
-    .education-item .school {
-      margin-top: 5px;
+    .project-description {
+      margin-bottom: 17px;
+      color: #5D4D54;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .project-collaborators {
+      margin-bottom: 22px;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 12px;
     }
 
-    .education-item time,
-    .education-date {
-      color: var(--muted);
-      font-size: 0.86rem;
-      text-align: right;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .skill-card {
-      padding: 28px;
-      border: 1px solid var(--line);
-      background: rgba(255, 251, 245, 0.58);
-    }
-
-    .skill-card h3 {
-      color: var(--burgundy);
-      font-family: "DM Sans", Arial, sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-    }
-
-    .skill-card ul {
-      margin-top: 20px;
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 26px;
+      padding: 0;
       list-style: none;
     }
 
-    .skill-card li {
-      padding-block: 9px;
-      border-bottom: 1px solid var(--line);
-      font-size: 0.94rem;
+    .tag-list li {
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      color: var(--burgundy);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
     }
 
-    .skill-card li:last-child {
-      border-bottom: 0;
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 26px;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 17px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--burgundy);
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.05;
+      overflow-wrap: anywhere;
+    }
+
+    .metric strong.metric-text {
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .project-details {
+      margin-bottom: 24px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-details summary {
+      position: relative;
+      padding: 17px 34px 17px 0;
+      color: var(--burgundy);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .project-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .project-details summary::after {
+      content: "+";
+      position: absolute;
+      top: 50%;
+      right: 4px;
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 400;
+      transform: translateY(-50%);
+      transition: transform 180ms ease;
+    }
+
+    .project-details[open] summary::after {
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .details-content {
+      padding: 0 0 18px;
+      color: #615159;
+      font-size: 13px;
+    }
+
+    .details-content p {
+      margin-bottom: 13px;
+    }
+
+    .details-content ul {
+      margin-bottom: 13px;
+      padding-left: 19px;
+    }
+
+    .details-content li {
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+
+    .details-content li::marker {
+      color: var(--burgundy);
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--burgundy);
+      color: var(--burgundy);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.9;
+    }
+
+    .text-link:hover {
+      color: var(--burgundy-dark);
+      border-bottom-color: var(--burgundy-dark);
+    }
+
+    /* Education and skills */
+
+    .education-section {
+      background: var(--burgundy-dark);
+      color: var(--creme);
+    }
+
+    .education-section .eyebrow {
+      color: #DBAABC;
+    }
+
+    .education-section .section-heading h2 {
+      color: var(--creme);
+    }
+
+    .education-section .section-lede {
+      color: #D8C6CC;
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 85px;
+    }
+
+    .column-title {
+      margin-bottom: 23px;
+      color: #DBAABC;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .education-item {
+      padding: 25px 0;
+      border-top: 1px solid var(--light-line);
+    }
+
+    .education-item:last-child {
+      border-bottom: 1px solid var(--light-line);
+    }
+
+    .education-date {
+      display: block;
+      margin-bottom: 8px;
+      color: #D3B4BE;
+      font-size: 11px;
+    }
+
+    .education-item h3 {
+      margin-bottom: 5px;
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .education-item p {
+      margin-bottom: 0;
+      color: #E1D3D6;
+      font-size: 14px;
+    }
+
+    .skill-group {
+      padding: 22px 0;
+      border-top: 1px solid var(--light-line);
+    }
+
+    .skill-group:last-child {
+      border-bottom: 1px solid var(--light-line);
+    }
+
+    .skill-group h3 {
+      margin-bottom: 13px;
+      color: #E9DDE0;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .skill-list li {
+      padding: 8px 12px;
+      border: 1px solid var(--light-line);
+      color: var(--creme);
+      font-size: 12px;
     }
 
     /* Contact */
 
-    .contact {
-      padding-block: 76px;
-      background: var(--burgundy);
-      color: var(--creme);
+    .contact-section {
+      position: relative;
+      overflow: hidden;
+      padding: 125px 0;
     }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 60px;
-      align-items: end;
-    }
-
-    .contact .eyebrow,
-    .contact h2 {
-      color: var(--creme);
-    }
-
-    .contact h2 {
-      max-width: 720px;
-    }
-
-    .contact p:not(.eyebrow) {
-      max-width: 630px;
-      margin-top: 22px;
-      color: rgba(247, 240, 228, 0.78);
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 15px;
-    }
-
-    .contact-link {
-      display: inline-flex;
-      gap: 10px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid var(--creme);
+    .contact-section::after {
+      content: "NM";
+      position: absolute;
+      right: -20px;
+      bottom: -115px;
+      z-index: -1;
+      color: rgba(107, 23, 52, 0.045);
+      font-family: var(--serif);
+      font-size: 350px;
       font-weight: 600;
+      line-height: 1;
+      pointer-events: none;
     }
 
-    .contact-link:hover {
-      color: #FFFFFF;
+    .contact-inner {
+      max-width: 850px;
+    }
+
+    .contact-section h2 {
+      margin-bottom: 27px;
+      font-size: clamp(4rem, 8vw, 7rem);
+    }
+
+    .contact-copy {
+      max-width: 680px;
+      margin-bottom: 35px;
+      color: #5F5056;
+      font-size: 18px;
+      line-height: 1.8;
     }
 
     /* Footer */
 
     .site-footer {
-      padding-block: 28px;
-      background: var(--burgundy-dark);
-      color: rgba(247, 240, 228, 0.75);
-      font-size: 0.78rem;
+      border-top: 1px solid var(--line);
     }
 
     .footer-inner {
+      min-height: 105px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 24px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-brand {
+      color: var(--burgundy);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .footer-links {
       display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+      align-items: center;
+      gap: 24px;
     }
 
-    .site-footer a {
-      color: var(--creme);
+    .footer-links a {
+      color: var(--burgundy);
+      font-weight: 600;
+    }
+
+    .footer-links a:hover {
       text-decoration: underline;
       text-underline-offset: 4px;
     }
 
     /* Responsive */
 
-    @media (max-width: 900px) {
-      .hero-grid,
-      .about-grid,
-      .section-heading,
-      .contact-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 1020px) {
+      .primary-nav {
+        gap: 19px;
       }
 
-      .hero-grid {
-        gap: 52px;
+      .hero {
+        grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+        gap: 45px;
+      }
+
+      .project-content {
+        padding: 32px;
+      }
+
+      .about-grid,
+      .education-grid {
+        gap: 50px;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .section {
+        padding: 85px 0;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .primary-nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 15px 22px 22px;
+        border: 1px solid var(--line);
+        background: var(--creme);
+        box-shadow: var(--shadow);
+      }
+
+      .primary-nav.is-open {
+        display: flex;
+      }
+
+      .primary-nav > a:not(.nav-cv) {
+        padding: 13px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .primary-nav > a:not(.nav-cv)::after {
+        display: none;
+      }
+
+      .nav-cv {
+        justify-content: center;
+        margin-top: 16px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        padding-top: 65px;
       }
 
       .hero-copy {
-        max-width: 720px;
+        max-width: 700px;
       }
 
-      .portrait-wrap {
-        width: min(420px, 100%);
-        margin-inline: auto;
+      .hero-portrait-wrap {
+        width: min(410px, calc(100% - 25px));
+        justify-self: center;
       }
 
-      .section-heading,
-      .about-grid {
-        gap: 24px;
-      }
-
-      .project {
+      .about-grid,
+      .education-grid {
         grid-template-columns: 1fr;
       }
 
-      .project-media img {
+      .about-note {
+        max-width: 560px;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card-reverse .project-visual {
+        order: 0;
+      }
+
+      .project-visual img {
         min-height: 0;
         aspect-ratio: 16 / 10;
       }
 
-      .skills-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .contact-actions {
-        margin-top: 8px;
+      .project-content {
+        padding: 38px;
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 560px) {
       .container {
-        width: min(100% - 32px, 1120px);
+        width: min(100% - 32px, 1180px);
       }
 
-      .nav-wrap {
+      .header-inner {
         min-height: 72px;
-        gap: 14px;
-      }
-
-      .brand-name {
-        display: none;
       }
 
       .monogram {
-        width: 39px;
-        height: 39px;
+        width: 41px;
+        height: 41px;
+        font-size: 21px;
       }
 
-      .nav-links {
-        gap: 15px;
-        font-size: 0.75rem;
-      }
-
-      .nav-links .education-nav {
+      .brand-text small {
         display: none;
       }
 
+      .brand-text strong {
+        font-size: 13px;
+      }
+
       .hero {
-        padding-block: 54px 70px;
+        padding-top: 52px;
+        padding-bottom: 52px;
       }
 
       .hero h1 {
-        font-size: clamp(3.7rem, 19vw, 5.4rem);
+        font-size: clamp(3.45rem, 17vw, 4.6rem);
       }
 
-      .section {
-        padding-block: 70px;
+      .hero-intro,
+      .about-copy p,
+      .contact-copy {
+        font-size: 16px;
       }
 
-      .metrics-grid,
-      .skills-grid {
+      .hero .button-row .button {
+        width: 100%;
+      }
+
+      .portrait-badge {
+        right: -16px;
+        width: 84px;
+        height: 84px;
+        font-size: 18px;
+      }
+
+      .hero-facts {
         grid-template-columns: 1fr;
+      }
+
+      .hero-fact,
+      .hero-fact:first-child {
+        padding: 20px 0;
+      }
+
+      .hero-fact + .hero-fact {
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+
+      .section-heading {
+        margin-bottom: 35px;
+      }
+
+      .about-note,
+      .project-content {
+        padding: 27px;
+      }
+
+      .project-visual img {
+        aspect-ratio: 4 / 3;
       }
 
       .metric {
-        display: grid;
-        grid-template-columns: 0.65fr 1fr;
-        gap: 15px;
-        align-items: center;
+        padding: 14px;
       }
 
-      .education-item {
-        grid-template-columns: 1fr;
-        gap: 8px;
+      .metric strong {
+        font-size: 24px;
       }
 
-      .education-item time,
-      .education-date {
-        text-align: left;
+      .metric strong.metric-text {
+        font-size: 13px;
       }
 
-      .project-content {
-        padding: 26px 22px;
+      .contact-section {
+        padding: 90px 0;
       }
 
-      .comparison-table {
-        font-size: 0.75rem;
+      .contact-section .button {
+        width: 100%;
       }
 
       .footer-inner {
+        align-items: flex-start;
         flex-direction: column;
+        padding: 28px 0;
+      }
+
+      .footer-links {
+        width: 100%;
+        justify-content: space-between;
       }
     }
 
@@ -842,244 +1188,286 @@
       *,
       *::before,
       *::after {
-        transition: none !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 
-<body>
+<body id="top">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="#top" aria-label="Nitya Mittal, back to top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Nitya Mittal — back to top">
         <span class="monogram" aria-hidden="true">NM</span>
-        <span class="brand-name">Nitya Mittal</span>
+        <span class="brand-text">
+          <strong>Nitya Mittal</strong>
+          <small>Sustainable Energy Engineering</small>
+        </span>
       </a>
 
-      <nav aria-label="Main navigation">
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li class="education-nav"><a href="#education">Education</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Open navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav
+        class="primary-nav"
+        id="primary-navigation"
+        aria-label="Primary navigation"
+      >
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education &amp; skills</a>
+        <a href="#contact">Contact</a>
+        <a
+          class="nav-cv"
+          href="nitya-mittal-cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View CV <span aria-hidden="true">↗</span>
+        </a>
       </nav>
     </div>
   </header>
 
   <main id="main-content">
-    <section class="hero" id="top">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Sustainable Energy Engineering · CFD</p>
+    <section class="container hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">CFD · Thermal systems · Sustainable energy</p>
 
-          <h1>
-            Nitya
-            <em>Mittal.</em>
-          </h1>
+        <h1 id="hero-title">
+          Engineering flow.<br>
+          <em>Understanding energy.</em>
+        </h1>
 
-          <p class="hero-lead">
-            MSc Sustainable Energy Engineering student at
-            <strong>Lund University</strong>, with a mechanical engineering
-            background and a focus on computational fluid dynamics,
-            thermal systems, and engineering simulation.
-          </p>
+        <p class="hero-intro">
+          I’m <strong>Nitya Mittal</strong>, an MSc Sustainable Energy
+          Engineering student at Lund University with a foundation in
+          mechanical engineering. I use computational fluid dynamics and
+          numerical modelling to investigate thermal systems, multiphase
+          flow, and energy technologies.
+        </p>
 
-          <div class="button-row">
-            <a class="button button-primary" href="#projects">
-              Explore my projects
-              <span aria-hidden="true">↓</span>
-            </a>
-
-            <a
-              class="button button-secondary"
-              href="nitya-mittal-cv.pdf"
-              download
-            >
-              Download CV
-              <span aria-hidden="true">↓</span>
-            </a>
-          </div>
+        <div class="button-row">
+          <a class="button button-primary" href="#projects">
+            Explore my projects <span aria-hidden="true">↓</span>
+          </a>
+          <a class="button button-secondary" href="#contact">
+            Let’s connect <span aria-hidden="true">→</span>
+          </a>
         </div>
+      </div>
 
-        <div class="portrait-wrap">
-          <div class="portrait-frame">
+      <div class="hero-portrait-wrap">
+        <figure class="portrait-frame">
+          <div class="portrait-image-wrap">
             <img
               src="nitya-mittal-profile.JPG"
               alt="Portrait of Nitya Mittal"
               fetchpriority="high"
             >
           </div>
-          <p class="portrait-caption">
-            Lund University<br>
-            Sustainable Energy Engineering
-          </p>
+          <figcaption>
+            <span>Nitya Mittal</span>
+            <span>Lund University</span>
+          </figcaption>
+        </figure>
+
+        <div class="portrait-badge" aria-label="MSc expected in 2027">
+          MSc<br>’27
         </div>
       </div>
     </section>
 
-    <section class="section section-border" id="about">
-      <div class="container about-grid">
-        <div>
-          <p class="eyebrow">01 — About</p>
-          <h2>Engineering with energy in mind.</h2>
-        </div>
+    <div class="container hero-facts" aria-label="At a glance">
+      <div class="hero-fact">
+        <span>Current programme</span>
+        <strong>MSc Sustainable Energy Engineering</strong>
+      </div>
+      <div class="hero-fact">
+        <span>Engineering focus</span>
+        <strong>CFD &amp; Thermal Systems</strong>
+      </div>
+      <div class="hero-fact">
+        <span>Selected case studies</span>
+        <strong>Battery Cooling &amp; Electrospray</strong>
+      </div>
+    </div>
 
+    <section class="section container" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <p class="eyebrow">Profile</p>
+        <h2 id="about-title">
+          A mechanical foundation.<br>
+          <em>An energy-focused future.</em>
+        </h2>
+      </div>
+
+      <div class="about-grid">
         <div class="about-copy">
           <p>
-            I am a sustainable energy engineering student with a foundation
-            in mechanical engineering. My project work uses computational
-            fluid dynamics to investigate thermal performance, fluid flow,
-            and multiphase systems.
+            My work sits at the intersection of fluid mechanics, heat
+            transfer, and computational modelling. I am particularly
+            interested in how careful numerical analysis can support the
+            development of more efficient and sustainable engineering
+            systems.
           </p>
 
           <p>
-            My experience includes building simulation geometries, preparing
-            CFD cases, generating meshes, screening turbulence models, and
-            running and interpreting simulations. I work with tools including
-            ANSYS Fluent, OpenFOAM, STAR-CCM+, ParaView, Cantera, and Python.
+            I am currently pursuing an MSc in Sustainable Energy Engineering
+            at Lund University, expected in May 2027, after completing a BSc
+            in Mechanical Engineering at Medi-Caps University. My project
+            experience includes air-cooled battery packs and electrospray in
+            cross-flow, using both commercial and open-source CFD tools.
           </p>
 
-          <div class="about-note">
-            Using simulation to understand engineering trade-offs—from
-            battery-pack cooling to electrospray behaviour.
-          </div>
+          <p>
+            I enjoy building well-posed simulations: creating geometry,
+            selecting modelling assumptions, generating meshes, and
+            examining results against physical expectations. I also value
+            collaborative workflows that allow a team to compare modelling
+            choices efficiently and transparently.
+          </p>
         </div>
+
+        <aside class="about-note" aria-label="Current academic focus">
+          <p class="about-note-label">Current focus</p>
+          <h3>Sustainable Energy Engineering</h3>
+          <p>
+            MSc studies at Lund University, with the degree expected in
+            May 2027.
+          </p>
+
+          <hr>
+
+          <p class="about-note-label">Engineering basis</p>
+          <p>
+            Fluid mechanics · Heat transfer · Computational modelling ·
+            Sustainable energy systems
+          </p>
+        </aside>
       </div>
     </section>
 
-    <section class="section section-border" id="projects">
+    <section
+      class="section projects-section"
+      id="projects"
+      aria-labelledby="projects-title"
+    >
       <div class="container">
         <div class="section-heading">
-          <div>
-            <p class="eyebrow">02 — Selected projects</p>
-            <h2>Simulation, analysis, and results.</h2>
-          </div>
-
-          <p class="section-intro">
-            Selected university projects involving thermal assessment,
-            computational fluid dynamics, and multiphase-flow modelling.
-            Each project includes the methods used, my individual
-            contributions, and the complete report.
+          <p class="eyebrow">Selected work</p>
+          <h2 id="projects-title">
+            Two studies. One approach:<br>
+            <em>make the physics visible.</em>
+          </h2>
+          <p class="section-lede">
+            University projects spanning battery thermal management and
+            electrohydrodynamic spray modelling, with expandable notes on
+            methods and individual contributions.
           </p>
         </div>
 
         <div class="project-list">
-          <!-- Project 1 -->
-          <article class="project">
-            <div class="project-media">
+          <article class="project-card">
+            <div class="project-visual">
               <img
                 class="project-media-contain"
                 src="battery-pack-cover.png"
-                alt="Figure from the CFD thermal assessment of an air-cooled battery pack"
+                alt="Cover figure for the air-cooled battery pack CFD report"
                 loading="lazy"
+                decoding="async"
               >
             </div>
 
             <div class="project-content">
-              <p class="project-number">Project 01 · Battery thermal management</p>
-
-              <h3>CFD-Based Thermal Assessment of Air-Cooled Battery Packs</h3>
-
-              <div class="project-meta">
-                <span>Lund University</span>
+              <div class="project-topline">
+                <span>Project 01 · Battery thermal management</span>
                 <time datetime="2026-11-19">19 November 2026</time>
               </div>
 
+              <h3>CFD-Based Thermal Assessment of Air-Cooled Battery Packs</h3>
+
               <p class="project-description">
-                A two-dimensional CFD assessment comparing inline and
-                staggered battery-cell arrangements. The study evaluated
-                the trade-off between cooling performance and pressure
-                drop under air-cooled operating conditions.
+                A comparative 2D steady RANS study of inline and staggered
+                cell arrangements, examining the trade-off between battery
+                cooling performance and pressure drop.
               </p>
 
-              <p class="collaborators">
-                <strong>Co-authored with:</strong>
-                Ella Majasuo and Hekla Lind Bergmann
+              <p class="project-collaborators">
+                Lund University · With Ella Majasuo and Hekla Lind Bergmann
               </p>
+
+              <ul class="tag-list" aria-label="Project tools and methods">
+                <li>ANSYS Fluent 2022</li>
+                <li>Steady RANS</li>
+                <li>Realizable k–ε</li>
+                <li>Mesh sensitivity</li>
+              </ul>
 
               <div class="metrics-grid" aria-label="Key project results">
                 <div class="metric">
-                  <span class="metric-value">9.05 K</span>
-                  <span class="metric-label">
-                    Cooler inline arrangement at 4 m/s
-                  </span>
+                  <strong>9.05 K</strong>
+                  <span>Inline cooling advantage at 4 m/s</span>
                 </div>
-
                 <div class="metric">
-                  <span class="metric-value">351.91 K</span>
-                  <span class="metric-label">
-                    Inline temperature, compared with 360.96 K staggered
-                  </span>
+                  <strong>351.91 K</strong>
+                  <span>Inline peak temperature at 4 m/s</span>
                 </div>
-
                 <div class="metric">
-                  <span class="metric-value">18.31 Pa</span>
-                  <span class="metric-label">
-                    Inline pressure drop, compared with 16.17 Pa staggered
-                  </span>
+                  <strong>18.31 Pa</strong>
+                  <span>Inline pressure drop</span>
+                </div>
+                <div class="metric">
+                  <strong>16.17 Pa</strong>
+                  <span>Staggered pressure drop</span>
                 </div>
               </div>
 
-              <details class="details">
-                <summary>Methods, results, and my contributions</summary>
-
+              <details class="project-details">
+                <summary>Methods, results &amp; my contribution</summary>
                 <div class="details-content">
-                  <p><strong>Methods</strong></p>
-                  <ul>
-                    <li>Two-dimensional, steady RANS simulations.</li>
-                    <li>Realizable k–epsilon turbulence model screening.</li>
-                    <li>Enhanced Wall Treatment and the COUPLED solver.</li>
-                    <li>A 1.0 mm mesh generated for the sensitivity study.</li>
-                    <li>Simulations performed using ANSYS Fluent 2022.</li>
-                  </ul>
+                  <p>
+                    The team used 2D steady RANS simulations with the
+                    realizable k–ε turbulence model, Enhanced Wall Treatment,
+                    and Fluent’s COUPLED solver to compare mesh sizes and
+                    cell arrangements.
+                  </p>
 
-                  <p><strong>My contributions</strong></p>
                   <ul>
-                    <li>Created the simulation geometry.</li>
-                    <li>Screened RANS turbulence models.</li>
-                    <li>Generated the 1.0 mm mesh for sensitivity analysis.</li>
-                    <li>Executed simulations concurrently.</li>
+                    <li>
+                      Created the geometry and screened RANS turbulence
+                      models.
+                    </li>
+                    <li>
+                      Generated the 1.0 mm mesh used for the sensitivity
+                      study.
+                    </li>
+                    <li>
+                      Ran simulations concurrently with two teammates across
+                      three computers to evaluate mesh sizes and cell
+                      arrangements.
+                    </li>
                   </ul>
 
                   <p>
-                    <strong>Comparison at 4 m/s:</strong>
-                    the inline arrangement achieved a lower temperature but
-                    required a higher pressure drop.
+                    At 4 m/s, the inline arrangement reached 351.91 K,
+                    compared with 360.96 K for the staggered arrangement—a
+                    9.05 K cooling advantage. This came with a higher
+                    pressure drop: 18.31 Pa versus 16.17 Pa.
                   </p>
-
-                  <table class="comparison-table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Arrangement</th>
-                        <th scope="col">Temperature</th>
-                        <th scope="col">Pressure drop</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Inline</th>
-                        <td>351.91 K</td>
-                        <td>18.31 Pa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Staggered</th>
-                        <td>360.96 K</td>
-                        <td>16.17 Pa</td>
-                      </tr>
-                    </tbody>
-                  </table>
                 </div>
               </details>
-
-              <ul class="tag-list" aria-label="Project tools and methods">
-                <li class="tag">ANSYS Fluent 2022</li>
-                <li class="tag">Steady RANS</li>
-                <li class="tag">Realizable k–ε</li>
-                <li class="tag">Thermal CFD</li>
-              </ul>
 
               <a
                 class="text-link"
@@ -1087,94 +1475,93 @@
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Read the full project report
-                <span aria-hidden="true">↗</span>
+                Read the full report <span aria-hidden="true">↗</span>
               </a>
             </div>
           </article>
 
-          <!-- Project 2 -->
-          <article class="project">
-            <div class="project-media">
+          <article class="project-card project-card-reverse">
+            <div class="project-visual">
               <img
                 src="electrospray-cover.png"
-                alt="Figure from the CFD study of an electrospray in cross-flow"
+                alt="Cover figure for the electrospray in cross-flow CFD report"
                 loading="lazy"
+                decoding="async"
               >
             </div>
 
             <div class="project-content">
-              <p class="project-number">Project 02 · Multiphase-flow modelling</p>
-
-              <h3>CFD Study of an Electrospray in Cross-Flow</h3>
-
-              <div class="project-meta">
-                <span>Lund University · MVKP20</span>
+              <div class="project-topline">
+                <span>Project 02 · Multiphase flow</span>
                 <time datetime="2026-10-16">16 October 2026</time>
               </div>
 
+              <h3>CFD Study of an Electrospray in Cross-Flow</h3>
+
               <p class="project-description">
-                An OpenFOAM study of n-dodecane droplets in a cross-flow
-                channel. The project used sprayFoam together with a custom
-                electrostatic force library to represent the electrospray
-                configuration.
+                An OpenFOAM study of charged n-dodecane droplets in a
+                cross-flow channel, using sprayFoam with a custom
+                electrostatic force library to investigate droplet-charge
+                settings.
               </p>
 
-              <p class="collaborators">
-                <strong>Co-authored with:</strong>
-                Arnaud Van Hecke and Sam Voncken
+              <p class="project-collaborators">
+                Lund University · MVKP20 · With Arnaud Van Hecke and Sam
+                Voncken
               </p>
 
-              <div class="metrics-grid" aria-label="Project modelling facts">
-                <div class="metric">
-                  <span class="metric-value">495,000</span>
-                  <span class="metric-label">Computational cells</span>
-                </div>
+              <ul class="tag-list" aria-label="Project tools and methods">
+                <li>OpenFOAM 7</li>
+                <li>sprayFoam</li>
+                <li>RANS k–ε</li>
+                <li>Electrostatics</li>
+              </ul>
 
+              <div class="metrics-grid" aria-label="Key project details">
                 <div class="metric">
-                  <span class="metric-value">sprayFoam</span>
-                  <span class="metric-label">
-                    OpenFOAM 7 solver with custom electrostatics
-                  </span>
+                  <strong>495,000</strong>
+                  <span>Cells in the computational mesh</span>
                 </div>
-
                 <div class="metric">
-                  <span class="metric-value">n-dodecane</span>
-                  <span class="metric-label">Modelled droplet phase</span>
+                  <strong class="metric-text">0.3 × 0.1 × 0.1 m</strong>
+                  <span>Cross-flow channel dimensions</span>
+                </div>
+                <div class="metric">
+                  <strong class="metric-text">n-dodecane</strong>
+                  <span>Modelled droplet phase</span>
+                </div>
+                <div class="metric">
+                  <strong class="metric-text">sprayFoam</strong>
+                  <span>OpenFOAM 7 solver</span>
                 </div>
               </div>
 
-              <details class="details">
-                <summary>Methods, setup, and my contributions</summary>
-
+              <details class="project-details">
+                <summary>Methods &amp; my contribution</summary>
                 <div class="details-content">
-                  <p><strong>Methods and computational setup</strong></p>
-                  <ul>
-                    <li>OpenFOAM 7 simulations using sprayFoam.</li>
-                    <li>A custom electrostatic force library.</li>
-                    <li>RANS modelling with the k–epsilon turbulence model.</li>
-                    <li>N-dodecane droplets simulated in cross-flow.</li>
-                    <li>
-                      A 495,000-cell mesh representing a
-                      0.3 m × 0.1 m × 0.1 m channel.
-                    </li>
-                  </ul>
+                  <p>
+                    The study modelled n-dodecane droplets in a
+                    495,000-cell mesh representing a 0.3 m × 0.1 m × 0.1 m
+                    channel. The simulations used RANS k–ε modelling,
+                    OpenFOAM 7, sprayFoam, and a custom electrostatic force
+                    library.
+                  </p>
 
-                  <p><strong>My contributions</strong></p>
                   <ul>
-                    <li>Created the simulation geometry.</li>
-                    <li>Prepared the OpenFOAM case setup.</li>
-                    <li>Ran the initial RANS baseline simulation.</li>
+                    <li>Created the computational geometry.</li>
+                    <li>
+                      Prepared the OpenFOAM case setup, including
+                      thermophysical properties, kinematic and transport
+                      parameters, and simulation inputs.
+                    </li>
+                    <li>
+                      Ran the initial RANS simulation to establish a
+                      baseline before the team investigated different
+                      droplet-charge settings.
+                    </li>
                   </ul>
                 </div>
               </details>
-
-              <ul class="tag-list" aria-label="Project tools and methods">
-                <li class="tag">OpenFOAM 7</li>
-                <li class="tag">sprayFoam</li>
-                <li class="tag">RANS k–ε</li>
-                <li class="tag">Electrospray</li>
-              </ul>
 
               <a
                 class="text-link"
@@ -1182,8 +1569,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Read the full project report
-                <span aria-hidden="true">↗</span>
+                Read the full report <span aria-hidden="true">↗</span>
               </a>
             </div>
           </article>
@@ -1191,125 +1577,111 @@
       </div>
     </section>
 
-    <section class="section section-border" id="education">
+    <section
+      class="section education-section"
+      id="education"
+      aria-labelledby="education-title"
+    >
       <div class="container">
         <div class="section-heading">
-          <div>
-            <p class="eyebrow">03 — Education</p>
-            <h2>My academic foundation.</h2>
-          </div>
-
-          <p class="section-intro">
-            A mechanical engineering foundation combined with graduate
-            studies in sustainable energy engineering.
+          <p class="eyebrow">Education &amp; toolkit</p>
+          <h2 id="education-title">
+            Learning the fundamentals.<br>
+            Applying them to energy.
+          </h2>
+          <p class="section-lede">
+            A mechanical engineering background supported by practical
+            experience across simulation, geometry creation,
+            post-processing, and scientific computing.
           </p>
         </div>
 
-        <div class="education-list">
-          <article class="education-item">
-            <p class="degree-label">Master of Science</p>
+        <div class="education-grid">
+          <div>
+            <h3 class="column-title">Education</h3>
 
-            <div>
-              <h3>Sustainable Energy Engineering</h3>
-              <p class="school">Lund University</p>
+            <article class="education-item">
+              <span class="education-date">Expected May 2027</span>
+              <h3>MSc Sustainable Energy Engineering</h3>
+              <p>Lund University</p>
+            </article>
+
+            <article class="education-item">
+              <span class="education-date">Undergraduate degree</span>
+              <h3>BSc Mechanical Engineering</h3>
+              <p>Medi-Caps University</p>
+            </article>
+          </div>
+
+          <div>
+            <h3 class="column-title">Technical skills</h3>
+
+            <div class="skill-group">
+              <h3>CFD &amp; simulation</h3>
+              <ul class="skill-list">
+                <li>ANSYS Fluent 2022</li>
+                <li>OpenFOAM 7</li>
+                <li>STAR-CCM+</li>
+                <li>Cantera</li>
+              </ul>
             </div>
 
-            <p class="education-date">Expected May 2027</p>
-          </article>
-
-          <article class="education-item">
-            <p class="degree-label">Bachelor of Science</p>
-
-            <div>
-              <h3>Mechanical Engineering</h3>
-              <p class="school">Medi-Caps University</p>
+            <div class="skill-group">
+              <h3>Geometry &amp; post-processing</h3>
+              <ul class="skill-list">
+                <li>Creo Parametric</li>
+                <li>ParaView</li>
+              </ul>
             </div>
 
-            <p class="education-date">Undergraduate degree</p>
-          </article>
+            <div class="skill-group">
+              <h3>Programming &amp; analysis</h3>
+              <ul class="skill-list">
+                <li>Python</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-border" id="skills">
+    <section
+      class="section contact-section"
+      id="contact"
+      aria-labelledby="contact-title"
+    >
       <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">04 — Technical skills</p>
-            <h2>Tools I work with.</h2>
+        <div class="contact-inner">
+          <p class="eyebrow">Get in touch</p>
+          <h2 id="contact-title">Let’s connect.</h2>
+
+          <p class="contact-copy">
+            I’m always glad to discuss CFD, thermal systems, and sustainable
+            energy—whether that means a technical question, a potential
+            collaboration, or an opportunity to contribute to an engineering
+            team. You can find me on LinkedIn or view my CV for a concise
+            overview of my background.
+          </p>
+
+          <div class="button-row">
+            <a
+              class="button button-primary"
+              href="https://www.linkedin.com/in/nityamittal05/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Connect on LinkedIn <span aria-hidden="true">↗</span>
+            </a>
+
+            <a
+              class="button button-secondary"
+              href="nitya-mittal-cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View my CV <span aria-hidden="true">↗</span>
+            </a>
           </div>
-
-          <p class="section-intro">
-            Software and computational tools used across my engineering
-            coursework, simulation work, and technical projects.
-          </p>
-        </div>
-
-        <div class="skills-grid">
-          <article class="skill-card">
-            <h3>CFD &amp; simulation</h3>
-            <ul>
-              <li>ANSYS Fluent 2022</li>
-              <li>OpenFOAM 7</li>
-              <li>STAR-CCM+</li>
-              <li>ParaView</li>
-            </ul>
-          </article>
-
-          <article class="skill-card">
-            <h3>Engineering &amp; modelling</h3>
-            <ul>
-              <li>Creo Parametric</li>
-              <li>Geometry creation</li>
-              <li>Mesh generation</li>
-              <li>Thermal-flow analysis</li>
-            </ul>
-          </article>
-
-          <article class="skill-card">
-            <h3>Scientific computing</h3>
-            <ul>
-              <li>Python</li>
-              <li>Cantera</li>
-              <li>RANS modelling</li>
-              <li>Simulation post-processing</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="container contact-grid">
-        <div>
-          <p class="eyebrow">05 — Contact</p>
-          <h2>Let’s talk energy, engineering, and CFD.</h2>
-
-          <p>
-            You can connect with me on LinkedIn, explore my project reports,
-            or download my CV for an overview of my education and experience.
-          </p>
-        </div>
-
-        <div class="contact-actions">
-          <a
-            class="contact-link"
-            href="https://www.linkedin.com/in/nityamittal05"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Connect on LinkedIn
-            <span aria-hidden="true">↗</span>
-          </a>
-
-          <a
-            class="contact-link"
-            href="nitya-mittal-cv.pdf"
-            download
-          >
-            Download my CV
-            <span aria-hidden="true">↓</span>
-          </a>
         </div>
       </div>
     </section>
@@ -1317,29 +1689,52 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© Nitya Mittal · Sustainable Energy Engineering</p>
+      <div>
+        <span class="footer-brand">Nitya Mittal</span>
+        <span> · CFD · Thermal Systems · Sustainable Energy</span>
+      </div>
 
       <div class="footer-links">
-        <a
-          href="https://github.com/n1tya-m1ttal/Nitya-porfolio"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Portfolio source
-        </a>
-
-        <a
-          href="https://github.com/n1tya-m1ttal"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
-
+        <span>© <span id="year">2026</span> Nitya Mittal</span>
         <a href="#top">Back to top ↑</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    const navToggle = document.querySelector(".nav-toggle");
+    const primaryNav = document.querySelector("#primary-navigation");
+
+    if (navToggle && primaryNav) {
+      const closeNavigation = () => {
+        primaryNav.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Open navigation");
+      };
+
+      navToggle.addEventListener("click", () => {
+        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+
+        primaryNav.classList.toggle("is-open", !isOpen);
+        navToggle.setAttribute("aria-expanded", String(!isOpen));
+        navToggle.setAttribute(
+          "aria-label",
+          isOpen ? "Open navigation" : "Close navigation"
+        );
+      });
+
+      primaryNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeNavigation);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeNavigation();
+        }
+      });
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
